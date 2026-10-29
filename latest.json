@@ -1,9 +1,9 @@
 ﻿{
     "windows":  {
-                    "version":  "2026.1029.1519",
-                    "build":  "714",
-                    "eid":  "fpEmujeEQ1oKiEhA0ftgIYve08fIOAdKlBGGJFzGGzlLkMzXxlLtd+FlW1dJX7E+I+lAbrT0DYDmBh5nVytUVnJPbYY9GcEbnWumNP33vyXLMS8isrdNoXIAgi1dHmp42Sq7vEL2Y2PAeeRBCMeEHgsK7GR+CqgRPs916kuVbh7KC4fGcz4w+09HXzGErFE7mVnFIqLqDoX80sHsZMmzPb2gABGWIxZ7JFFikU4s8zwnqj0gNi7QMRwOMKBS9KD/cKKz/y0EQOHLKNm2INxq2aW0s3gwJN9R6TGdndjsrn0i68TA6BKgpT0Tgr4Yxh+GaxY9Jp2o9XnMOyRJlNDTaw==",
+                    "version":  "2026.1029.1913",
+                    "build":  "719",
+                    "eid":  "jPrOc2HxGIJB2Cuxsty7ggVYzTr8FOxpHUYsFL8WOqRYxzKxgnz9jJCJFqp4aleSxw0ZPRzSMRxDePfuBzM7vWFG8YTNWKDsfcZ2oqcLyhAq63D5ItxT6eMJBvDlFwcbOlRhvm4+02eoKYS/Y/oXzf0eIvN1i76u3CH6TrYbGgy9Bb4Mql2a/O3b3elSQu+3KJacEYkCjutsKgQAVxhlgTClpEdjkYFOhn47Mfq+tBP8phsJ31yLDPFv/5Qce8+mypzZdJsY7uj0yY2eBbJCRDt5uQl+qSioIxaGcmlcolsakoIRgxTC8riVt8fqRnzwTnZ1bejcznwtQePCszGGPg==",
                     "name":  "Forge Setup (Windows).exe",
-                    "size":  44859284
+                    "size":  44855080
                 }
 }
