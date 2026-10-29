@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Forge</title>
+<meta name="description" content="Download Forge for Windows or Mac.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Forge's dark theme (crates/forge-ds/src/lib.rs, DARK) */
+  :root {
+    --bg: #0f1113; --panel: #15181b; --raised: #1c2024; --raised-hi: #262b30;
+    --line: #2a2f35; --text: #eceae6; --text-2: #c9ccd0; --muted: #959ba2;
+    --accent: #e8952c; --on-accent: #1a1206;
+    --accent-soft: rgba(232,149,44,.08); --accent-line: rgba(232,149,44,.28);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
+    font: 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,149,44,.10), transparent 70%);
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 56px 16px 64px; }
+  header { text-align: center; margin-bottom: 36px; }
+  header img { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 10px 40px rgba(232,149,44,.18); }
+  h1 { font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin: 18px 0 4px; }
+  .tag { color: var(--muted); margin: 0; }
+
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .get { text-align: center; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 48px; padding: 0 26px; border-radius: 10px; border: 0;
+    background: var(--accent); color: var(--on-accent); font: 600 16px Inter, system-ui, sans-serif;
+    text-decoration: none; cursor: pointer; transition: filter .15s, transform .05s;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:active { transform: translateY(1px); }
+  .btn[aria-disabled="true"] { background: var(--raised-hi); color: var(--muted); cursor: default; filter: none; }
+  .btn svg { width: 18px; height: 18px; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 10px; min-height: 20px; }
+  .meta abbr { text-decoration: none; border-bottom: 1px dotted var(--muted); cursor: help; }
+  .other { margin-top: 14px; font-size: 14px; }
+  .other a, .link { color: var(--accent); text-decoration: none; }
+  .other a:hover, .link:hover { text-decoration: underline; }
+
+  h2 { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 40px 0 12px; }
+  .tabs { display: inline-flex; background: var(--raised); border: 1px solid var(--line); border-radius: 9px; padding: 3px; margin-bottom: 14px; }
+  .tabs button {
+    border: 0; background: none; color: var(--text-2); font: 500 14px Inter, system-ui, sans-serif;
+    padding: 7px 16px; border-radius: 6px; cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { background: var(--raised-hi); color: var(--text); }
+  ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  ol.steps li { counter-increment: s; position: relative; padding: 0 0 18px 44px; color: var(--text-2); }
+  ol.steps li:last-child { padding-bottom: 0; }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 0; top: -1px; width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center; font: 600 13px Inter, system-ui, sans-serif;
+    color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+  }
+  ol.steps b { color: var(--text); font-weight: 600; }
+  .ui {
+    display: inline-block; padding: 0 6px; border-radius: 5px; background: var(--raised-hi);
+    border: 1px solid var(--line); color: var(--text); font-size: 13px; white-space: nowrap;
+  }
+  .note { margin-top: 16px; padding: 12px 14px; border-radius: 9px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
+  .note code, .code { font: 500 12.5px "JetBrains Mono", ui-monospace, monospace; color: var(--text-2); }
+  .note code { word-break: break-all; }
+  .code { display: inline-block; padding: 2px 8px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); letter-spacing: .02em; }
+  .lock { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .lock input {
+    min-height: 48px; width: 220px; max-width: 100%; padding: 0 14px; border-radius: 10px;
+    background: var(--bg); border: 1px solid var(--line); color: var(--text);
+    font: 500 16px Inter, system-ui, sans-serif; outline: none;
+  }
+  .lock input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .lock-hint { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .bad { color: #e5534b; }
+  [hidden] { display: none !important; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 44px; }
+  @media (max-width: 480px) {
+    main { padding-top: 36px; }
+    h1 { font-size: 28px; }
+    .btn { width: 100%; }
+    ol.steps li { padding-left: 40px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon.png" alt="" width="96" height="96">
+    <h1>Forge</h1>
+    <p class="tag">Game audio and music, in one app.</p>
+  </header>
+
+  <section class="card get" aria-live="polite">
+    <form class="lock-form" id="lock" hidden>
+      <p class="lock-hint">Enter the download password Psilocybian gave you.</p>
+      <div class="lock">
+        <input id="pw" type="password" autocomplete="current-password" placeholder="Password" aria-label="Download password" required>
+        <button class="btn" type="submit" id="unlock">Unlock</button>
+      </div>
+      <div class="meta" id="lock-msg"></div>
+    </form>
+    <div id="got" hidden>
+    <a class="btn" id="dl" aria-disabled="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+      <span id="dl-label">Loading…</span>
+    </a>
+    <div class="meta" id="meta"></div>
+    <div class="other" id="other"></div>
+    </div>
+  </section>
+
+  <h2>Installing</h2>
+  <section class="card">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-windows" aria-selected="true" data-os="windows">Windows</button>
+      <button role="tab" id="tab-mac" aria-selected="false" data-os="mac">Mac</button>
+    </div>
+
+    <ol class="steps" data-os="windows">
+      <li>Open <b>Forge Setup (Windows).exe</b> from your downloads. If the browser says it isn't commonly downloaded, choose <span class="ui">Keep</span>.</li>
+      <li>Windows shows <b>“Windows protected your PC”</b>. That's because Forge isn't from a big company with a paid certificate. Click <span class="ui">More info</span>, then <span class="ui">Run anyway</span>.</li>
+      <li>Click through the installer. Forge goes on your desktop and in the Start menu, and opens when it's done.</li>
+    </ol>
+
+    <ol class="steps" data-os="mac" hidden>
+      <li>Open <b>Forge (Mac).dmg</b> from your downloads and drag <b>Forge</b> onto <b>Applications</b>.</li>
+      <li>Open Forge from Applications. The Mac says it <b>can't verify Forge</b>, because it isn't from a paid Apple developer account. Click <span class="ui">Done</span> (not Move to Trash).</li>
+      <li>Open <b>System Settings → Privacy &amp; Security</b>, scroll down to the message about Forge and click <span class="ui">Open Anyway</span>, then enter your password. You only do this once.</li>
+    </ol>
+    <div class="note" data-os="mac" hidden>
+      If the Mac says Forge is <b>damaged</b>, open Terminal and run
+      <code>xattr -dr com.apple.quarantine /Applications/Forge.app</code>, then open Forge again.
+    </div>
+  </section>
+
+  <h2>Your code</h2>
+  <section class="card">
+    <ol class="steps">
+      <li>When Forge opens for the first time it asks for a code. Use the one Psilocybian sent you; it looks like <span class="code">FORGE-XXXX-XXXX-…</span></li>
+      <li>Paste it under <span class="ui">Or enter a code</span> and click <span class="ui">Use code</span>.</li>
+      <li>That's it. Forge keeps itself up to date from now on. The code works on one computer: on a new one, Forge asks Psilocybian to move it.</li>
+    </ol>
+  </section>
+
+  <footer>Forge is by invitation. No code yet? Ask Psilocybian.</footer>
+</main>
+
+<script>
+(() => {
+  const NAMES = { windows: 'Windows', mac: 'Mac' };
+  const ua = navigator.userAgent;
+  const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+  // Phones and tablets (iPhones say "like Mac OS X") get both downloads.
+  const phone = /iPhone|iPad|iPod|Android|Mobile/.test(ua) || navigator.maxTouchPoints > 1 && /mac/i.test(plat);
+  const os = phone ? null
+           : /mac/i.test(plat) || /Macintosh|Mac OS X/.test(ua) ? 'mac'
+           : /win/i.test(plat) || /Windows/.test(ua) ? 'windows' : null;
+
+  // Install steps: the visitor's computer first.
+  const tabs = document.querySelectorAll('.tabs button');
+  function show(which) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.os === which)));
+    document.querySelectorAll('[data-os]:not(button)').forEach(el => { el.hidden = el.dataset.os !== which; });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.os)));
+  if (os) show(os);
+
+  const url = id => 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
+  const mb = n => n > 0 ? Math.round(n / 1048576) + ' MB' : '';
+  // "2026.1029.1411" (UTC) -> "29 Oct 2026, 15:11" in the visitor's time,
+  // like Forge's version tooltip.
+  function built(v) {
+    const m = /^(\d{4})\.(\d{2})(\d{2})\.(\d{2})(\d{2})$/.exec(v || '');
+    if (!m) return '';
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]));
+    return d.toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
+  const dl = document.getElementById('dl'), label = document.getElementById('dl-label');
+  const meta = document.getElementById('meta'), other = document.getElementById('other');
+
+  function render(latest) {
+    const main = os && latest[os] ? os : (latest.windows ? 'windows' : latest.mac ? 'mac' : null);
+    if (!main) { label.textContent = 'Not ready yet'; meta.textContent = 'Check back soon.'; return; }
+    const r = latest[main];
+    dl.href = url(r.id);
+    dl.setAttribute('aria-disabled', 'false');
+    dl.setAttribute('download', '');
+    label.textContent = 'Download for ' + NAMES[main];
+    meta.textContent = '';
+    const ver = document.createElement('abbr');
+    ver.textContent = 'Version ' + (r.build || r.version);
+    const when = built(r.version);
+    if (when) ver.title = 'Built ' + when;
+    meta.append(ver);
+    if (mb(r.size)) meta.append(' · ' + mb(r.size));
+    if (os && main !== os) meta.append(' · not available for ' + NAMES[os] + ' yet');
+    if (phone) meta.append(' · Forge runs on Windows and Mac: open this page on your computer');
+
+    const rest = Object.keys(NAMES).filter(k => k !== main && latest[k]);
+    other.textContent = '';
+    rest.forEach((k, i) => {
+      if (i) other.append(' · ');
+      const a = document.createElement('a');
+      a.href = url(latest[k].id);
+      a.textContent = 'Download for ' + NAMES[k];
+      other.append(a);
+      if (mb(latest[k].size)) other.append(' (' + mb(latest[k].size) + ')');
+    });
+  }
+
+  // The download links are locked with the download password (see
+  // README.md): lock.json holds a private key encrypted with a key made from
+  // the password; each build's Drive file id in latest.json (eid) is
+  // encrypted with the matching public key by the build scripts.
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  async function unlock(lock, latest, pw) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+    const aes = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: b64(lock.salt), iterations: lock.iterations, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    // Throws on a wrong password (the tag doesn't match).
+    const pkcs8 = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(lock.iv) }, aes, b64(lock.data));
+    const key = await crypto.subtle.importKey('pkcs8', pkcs8, { name: 'RSA-OAEP', hash: 'SHA-1' }, false, ['decrypt']);
+    const open = {};
+    for (const k of Object.keys(NAMES)) {
+      const r = latest[k];
+      if (!r || !r.eid) continue;
+      const id = await crypto.subtle.decrypt({ name: 'RSA-OAEP' }, key, b64(r.eid));
+      open[k] = Object.assign({}, r, { id: new TextDecoder().decode(id) });
+    }
+    return open;
+  }
+
+  const form = document.getElementById('lock'), pwIn = document.getElementById('pw');
+  const msg = document.getElementById('lock-msg'), got = document.getElementById('got');
+  const SAVED = 'forge-download-password';
+  const get = (f) => fetch(f, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+  Promise.all([get('latest.json'), get('lock.json')]).then(async ([latest, lock]) => {
+    latest = latest || {};
+    if (!lock || !crypto.subtle) { got.hidden = false; render({}); return; }
+    async function tryPw(pw, quiet) {
+      try {
+        const open = await unlock(lock, latest, pw);
+        try { localStorage.setItem(SAVED, pw); } catch (e) {}
+        form.hidden = true; got.hidden = false; render(open);
+        return true;
+      } catch (e) {
+        if (!quiet) { msg.textContent = 'Wrong password.'; msg.className = 'meta bad'; pwIn.select(); }
+        return false;
+      }
+    }
+    let saved = null;
+    try { saved = localStorage.getItem(SAVED); } catch (e) {}
+    if (saved && await tryPw(saved, true)) return;
+    try { localStorage.removeItem(SAVED); } catch (e) {}
+    form.hidden = false;
+    pwIn.focus();
+    form.addEventListener('submit', ev => {
+      ev.preventDefault();
+      msg.textContent = 'Checking…'; msg.className = 'meta';
+      tryPw(pwIn.value, false);
+    });
+  });
+})();
+</script>
+</body>
+</html>
