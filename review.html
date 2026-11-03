@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge Review</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Forge's dark theme (crates/forge-ds/src/lib.rs, DARK) */
+  :root {
+    --bg: #0f1113; --panel: #15181b; --raised: #1c2024; --raised-hi: #262b30;
+    --line: #2a2f35; --text: #eceae6; --text-2: #c9ccd0; --muted: #959ba2;
+    --accent: #e8952c; --on-accent: #1a1206;
+    --accent-soft: rgba(232,149,44,.08); --accent-line: rgba(232,149,44,.28);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
+    font: 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,149,44,.10), transparent 70%);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 4px; overflow-wrap: anywhere; }
+  .tag { color: var(--muted); margin: 0 0 24px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 40px; padding: 0 18px; border-radius: 10px; border: 0;
+    background: var(--accent); color: var(--on-accent); font: 600 15px Inter, system-ui, sans-serif;
+    cursor: pointer; text-decoration: none;
+  }
+  .btn.ghost { background: var(--raised); color: var(--text); border: 1px solid var(--line); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .time { font: 500 14px "JetBrains Mono", monospace; color: var(--text-2); min-width: 92px; }
+  #bar { position: relative; height: 44px; background: var(--raised); border-radius: 8px; cursor: pointer; margin: 14px 0 4px; overflow: hidden; }
+  #fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent-soft); border-right: 2px solid var(--accent); }
+  .dot { position: absolute; top: 6px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--panel); }
+  input, textarea {
+    width: 100%; background: var(--raised); color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 10px 12px; font: 15px Inter, system-ui, sans-serif;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--accent-line); border-color: var(--accent); }
+  label { display: block; color: var(--muted); font-size: 13px; margin: 0 0 6px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  li:first-child { border-top: 0; }
+  li .t { font: 500 13px "JetBrains Mono", monospace; color: var(--accent); cursor: pointer; min-width: 56px; }
+  li .x { margin-left: auto; color: var(--muted); background: none; border: 0; cursor: pointer; font-size: 18px; }
+  li span.txt { overflow-wrap: anywhere; }
+  .muted { color: var(--muted); }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--raised); border-radius: 8px; padding: 12px; font: 13px/1.5 "JetBrains Mono", monospace; color: var(--text-2); margin: 12px 0; }
+  .err { color: #e5645b; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title">Review</h1>
+  <p class="tag">Listen, and leave a note wherever something should change. Then send your notes back.</p>
+
+  <div class="card" id="player">
+    <audio id="audio" preload="auto"></audio>
+    <div class="row">
+      <button class="btn" id="play" disabled>Play</button>
+      <span class="time" id="clock">0:00 / 0:00</span>
+      <a class="btn ghost" id="drive" target="_blank" rel="noopener" style="margin-left:auto">Open in Google Drive</a>
+    </div>
+    <div id="bar" title="Click to jump there"><div id="fill"></div></div>
+    <p class="muted" id="status" style="margin:6px 0 0;font-size:13px">Loading the mix…</p>
+  </div>
+
+  <div class="card">
+    <label for="note">A note at <span id="at">0:00</span> (pauses while you type)</label>
+    <div class="row" style="flex-wrap:nowrap">
+      <input id="note" placeholder="e.g. the vocal is too quiet here (or 1:23 then a note)" autocomplete="off">
+      <button class="btn" id="add">Add</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <ul id="notes"><li class="muted">No notes yet.</li></ul>
+  </div>
+
+  <div class="card">
+    <label for="name">Your name</label>
+    <input id="name" placeholder="So they know who it's from" autocomplete="name">
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="copy">Copy my notes</button>
+      <a class="btn ghost" id="mail">Send by email</a>
+    </div>
+    <pre id="out" hidden></pre>
+    <p class="muted" style="font-size:13px;margin:8px 0 0">Send what you copied to whoever sent you this link. They paste it into Forge and your notes appear at their moments in the song.</p>
+  </div>
+</main>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var params = {};
+  (location.hash.slice(1) || "").split("&").forEach(function (kv) {
+    var i = kv.indexOf("=");
+    if (i > 0) { try { params[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); } catch (e) {} }
+  });
+  var file = params.f || "", title = params.t || "Review";
+  $("title").textContent = title;
+  document.title = title + " · Forge Review";
+  var audio = $("audio");
+  if (!file) {
+    $("status").innerHTML = '<span class="err">This link has no mix in it. Ask for the link again.</span>';
+  } else {
+    audio.src = "https://drive.usercontent.google.com/download?id=" + encodeURIComponent(file) + "&export=download";
+    $("drive").href = "https://drive.google.com/file/d/" + encodeURIComponent(file) + "/view";
+  }
+  var key = "forge-review-" + file;
+  var notes = [];
+  try { notes = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { notes = []; }
+  try { $("name").value = localStorage.getItem("forge-review-name") || ""; } catch (e) {}
+  function save() { try { localStorage.setItem(key, JSON.stringify(notes)); } catch (e) {} }
+
+  function clock(s) {
+    s = Math.max(0, s || 0);
+    var m = Math.floor(s / 60), r = Math.round((s - m * 60) * 10) / 10;
+    if (r >= 60) { m += 1; r = 0; }
+    var whole = Math.abs(r - Math.round(r)) < 1e-6;
+    var sec = whole ? String(Math.round(r)) : r.toFixed(1);
+    if ((whole ? Math.round(r) : r) < 10) sec = "0" + sec;
+    return m + ":" + sec;
+  }
+  function dur() { return isFinite(audio.duration) ? audio.duration : 0; }
+  function draw() {
+    var d = dur();
+    $("fill").style.width = d ? (audio.currentTime / d * 100) + "%" : "0";
+    $("clock").textContent = clock(audio.currentTime) + " / " + clock(d);
+    $("at").textContent = clock(audio.currentTime);
+  }
+  function render() {
+    notes.sort(function (a, b) { return a.t - b.t; });
+    var ul = $("notes"); ul.innerHTML = "";
+    if (!notes.length) { ul.innerHTML = '<li class="muted">No notes yet.</li>'; }
+    notes.forEach(function (n, i) {
+      var li = document.createElement("li");
+      var t = document.createElement("span"); t.className = "t"; t.textContent = clock(n.t);
+      t.title = "Play from here"; t.onclick = function () { audio.currentTime = Math.max(0, n.t - 2); audio.play(); };
+      var x = document.createElement("span"); x.className = "txt"; x.textContent = n.text;
+      var del = document.createElement("button"); del.className = "x"; del.textContent = "×"; del.title = "Remove";
+      del.onclick = function () { notes.splice(i, 1); save(); render(); };
+      li.appendChild(t); li.appendChild(x); li.appendChild(del); ul.appendChild(li);
+    });
+    var bar = $("bar"); Array.prototype.slice.call(bar.querySelectorAll(".dot")).forEach(function (d) { d.remove(); });
+    var d = dur();
+    if (d) notes.forEach(function (n) {
+      var dot = document.createElement("div"); dot.className = "dot"; dot.style.left = (n.t / d * 100) + "%"; dot.title = clock(n.t) + "  " + n.text;
+      bar.appendChild(dot);
+    });
+  }
+  function text() {
+    var name = $("name").value.trim();
+    var lines = ["Forge review: " + title, "At: " + (parseFloat(params.s) || 0).toFixed(3)];
+    if (name) lines.push("From: " + name);
+    notes.forEach(function (n) { lines.push(clock(n.t) + "  " + n.text.replace(/\s+/g, " ")); });
+    return lines.join("\n");
+  }
+
+  audio.addEventListener("loadedmetadata", function () { $("play").disabled = false; $("status").textContent = "Ready."; draw(); render(); });
+  audio.addEventListener("timeupdate", draw);
+  audio.addEventListener("play", function () { $("play").textContent = "Pause"; });
+  audio.addEventListener("pause", function () { $("play").textContent = "Play"; });
+  audio.addEventListener("error", function () {
+    $("status").innerHTML = '<span class="err">The mix couldn\'t be played here.</span> Use “Open in Google Drive” to listen there, and type the times into your notes.';
+    $("play").disabled = true;
+  });
+  $("play").onclick = function () { audio.paused ? audio.play() : audio.pause(); };
+  $("bar").onclick = function (e) {
+    var r = this.getBoundingClientRect(), d = dur();
+    if (d) audio.currentTime = (e.clientX - r.left) / r.width * d;
+  };
+  var noteAt = 0;
+  $("note").addEventListener("focus", function () { noteAt = audio.currentTime; audio.pause(); });
+  $("note").addEventListener("input", function () { if (!audio.paused) audio.pause(); });
+  function add() {
+    var v = $("note").value.trim();
+    if (!v) return;
+    var t = noteAt || audio.currentTime;
+    // "1:23 text": a time typed in (when listening somewhere else).
+    var m = v.match(/^(\d+):(\d{1,2}(?:\.\d+)?)\s+(.+)$/);
+    if (m && parseFloat(m[2]) < 60) { t = parseInt(m[1], 10) * 60 + parseFloat(m[2]); v = m[3]; }
+    notes.push({ t: Math.round(t * 10) / 10, text: v });
+    $("note").value = ""; save(); render(); noteAt = 0;
+    audio.play();
+  }
+  $("add").onclick = add;
+  $("note").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); add(); } });
+  $("name").addEventListener("input", function () { try { localStorage.setItem("forge-review-name", $("name").value); } catch (e) {} });
+  $("copy").onclick = function () {
+    var t = text(), out = $("out");
+    out.textContent = t; out.hidden = false;
+    var done = function () { $("copy").textContent = "Copied"; setTimeout(function () { $("copy").textContent = "Copy my notes"; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () {});
+    else { var r = document.createRange(); r.selectNodeContents(out); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  };
+  $("mail").onclick = function () {
+    location.href = "mailto:?subject=" + encodeURIComponent("Notes on " + title) + "&body=" + encodeURIComponent(text());
+  };
+  render(); draw();
+})();
+</script>
+</body>
+</html>
