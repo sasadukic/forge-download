@@ -1,10 +1,10 @@
 {
   "mac": {
-    "version": "2026.1106.0642",
-    "build": "768",
-    "eid": "ZRVnoyF+hTwK56yJkMoTrgCuOORIeItHbIVNdybV5cY1L7EXoErpP/1pvRbOxYlZcF8n+460nuCus46Xz/3Z8ShSI++StKQho4v9Oa/Tm21jUrv8W0mJDPPiAU2NXpcivx8LrVjaK1GkhaXrlNN3dIuwzxlDFAkHSWCsU6eWdNn9xz9elj1c6GudkxP+BnTcGJEoCel/e9XLuTlucc5QugfzWVRv6eX7yIKnzU5hZ1KkMXZ8Y2lqUIHjOdcc0L0+gGu+81OIazIbYE2NaM8hEXTRwDI7Z6bkxfk/w73oJttRW0g6XB4Vlskn9qlofIRhI62T8CJNSV6c6vGYPrItWQ==",
+    "version": "2026.1106.0652",
+    "build": "916",
+    "eid": "GmMlmOEvwwMVm3tm/FPhIQZ+z/0JSHCuk8T5HctTDrTk01Gb6PN2qfSWry0xwjp6Tezu0S76kwWIT9Rz/Qsd1Gck0n9yx6TldsMUq+022th3I56lKVi90ol1gyONMCEzLoV5UP6IkyDeMXvqAke/qGmKPlR9vFr3pUBp6WJXaJaHvrr4IXLGN0UjeZ642LBwBP49GDF1NAcXdgf1C7A9dfKpX7hFU7q86cuGyf1RWHsoh6hWsH6p7uxzgUbXlQ9RwVy2icheL13+sDsiLNkHYv0i/JMvKMthQYBOLEQy+qa2miDhx0aszHuELzudGK5GAq74G+5Kvzt+t8AbCfRJLg==",
     "name": "Forge (Mac).dmg",
-    "size": 65543883
+    "size": 96457006
   },
   "windows": {
     "version": "2026.1105.1911",
