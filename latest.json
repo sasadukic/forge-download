@@ -1,16 +1,16 @@
-{
-  "mac": {
-    "version": "2026.1106.0652",
-    "build": "916",
-    "eid": "GmMlmOEvwwMVm3tm/FPhIQZ+z/0JSHCuk8T5HctTDrTk01Gb6PN2qfSWry0xwjp6Tezu0S76kwWIT9Rz/Qsd1Gck0n9yx6TldsMUq+022th3I56lKVi90ol1gyONMCEzLoV5UP6IkyDeMXvqAke/qGmKPlR9vFr3pUBp6WJXaJaHvrr4IXLGN0UjeZ642LBwBP49GDF1NAcXdgf1C7A9dfKpX7hFU7q86cuGyf1RWHsoh6hWsH6p7uxzgUbXlQ9RwVy2icheL13+sDsiLNkHYv0i/JMvKMthQYBOLEQy+qa2miDhx0aszHuELzudGK5GAq74G+5Kvzt+t8AbCfRJLg==",
-    "name": "Forge (Mac).dmg",
-    "size": 96457006
-  },
-  "windows": {
-    "version": "2026.1105.1911",
-    "build": "915",
-    "eid": "TtLYPlnpLPyKmGYno6J7aIh2Ozx7cr1nyARBPf9pMY/x8fFUAAm88weqOdpJCa0DpiOtqc13eh+vgPvadq/HG/xQi2/k1/HZGpCLpfjL4iPAJDmGg67YOqbSpN6q2t1+z1O3WBmYiV+MakMu+4A9XTOuiCb6mdPMX5IoHIrEei4NfFTQVqS1230zlFYdWD103b6fEXFPbiDhDz7A4ni+So34kZFEREfLDENtRoVzjR92g05MWOdCYyvhb9+pC7jMreDEseCsIkDghmPBxk6R2VWsE/7k+EtWnMRnSF6Mh2QJ6H11touxdGqoalh0suqcAoUFPkUU37DBkVyPWeoWxg==",
-    "name": "Forge Setup (Windows).exe",
-    "size": 46041210
-  }
+﻿{
+    "mac":  {
+                "version":  "2026.1106.0652",
+                "build":  "916",
+                "eid":  "GmMlmOEvwwMVm3tm/FPhIQZ+z/0JSHCuk8T5HctTDrTk01Gb6PN2qfSWry0xwjp6Tezu0S76kwWIT9Rz/Qsd1Gck0n9yx6TldsMUq+022th3I56lKVi90ol1gyONMCEzLoV5UP6IkyDeMXvqAke/qGmKPlR9vFr3pUBp6WJXaJaHvrr4IXLGN0UjeZ642LBwBP49GDF1NAcXdgf1C7A9dfKpX7hFU7q86cuGyf1RWHsoh6hWsH6p7uxzgUbXlQ9RwVy2icheL13+sDsiLNkHYv0i/JMvKMthQYBOLEQy+qa2miDhx0aszHuELzudGK5GAq74G+5Kvzt+t8AbCfRJLg==",
+                "name":  "Forge (Mac).dmg",
+                "size":  96457006
+            },
+    "windows":  {
+                    "version":  "2026.1106.0742",
+                    "build":  "916",
+                    "eid":  "dRweWVTu0eNASH6k86IFPvLBVA/ffvww84526CxXyallb+QLHo5YPJby7lKzXWmN7JRQPQ5cHqZ7yH3ZE8vxIbIp1IJ+qjIFxfRZmomRgqftrkeyVrnOeA38beDOJJA93zXZNya+Flh4W2k3JPo145KBqDMK91b/MkwoJLXQjqG9qV3mTTQvr5bMlFP0GL49kvU1RjJYdBvVdldmk79p+4HpxVfNUYdDnPz7ALVwgop2N3295QDHkjtmhVVoCgFUtcikdBuL9zmvbK8E5xYK+xFSH0mb402y4vfc8QRuTGqLQNbT/H05u07e3ZnjTZQEpCRII8ckX9tigz7Zu3Ofkw==",
+                    "name":  "Forge Setup (Windows).exe",
+                    "size":  46018484
+                }
 }
